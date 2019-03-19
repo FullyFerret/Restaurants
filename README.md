@@ -1,3 +1,102 @@
+## New Age Solutions Test
+
+1.	How long did you spend on the coding test? What would you add to your solution if you had more time? If you didn't spend much time on the coding test then use this as an opportunity to explain what you would add.
+  
+  4 hours; add tests, use advanced datatable library (for pagination, sorting by column), query more than by name field, fix aesthetic issues
+
+2.	What was the most useful feature that was added to the latest version of your chosen language? Please include a snippet of code that shows how you've used it.
+
+  Promises
+  
+```javascript
+Promise.all(promises).then((data) => {
+    if (!data || data.length < 2) {
+        return;
+    }
+
+    console.log(`${this.title}: promiseToPlayAudioVideoSynced promise all resolved`);
+
+    let audioWave = data.pop();
+    let videoElements = data;
+
+
+    if (this.audioDeferredPromise) {
+        this.audioDeferredPromise = null;
+    }
+
+    if (this.videoDeferredPromises) {
+        this.videoDeferredPromises.length = 0;
+    }
+
+    if (this.isActive) {
+        for (let videoElement of videoElements) {
+            if (videoElement && $(videoElement).length && !videoElement.playing) {
+                videoElement.play();
+            }
+        }
+        if (!audioWave.isPlaying()) {
+            audioWave.play();
+            let playPromise = audioWave.play();
+            if (playPromise !== undefined) {
+                playPromise.catch(() => {
+                    this.pause();
+                });
+            }
+        }
+    }
+    else {
+        console.log(`${this.title}: promiseToPlayAudioVideoSynced promise all pause audio and videos`);
+        this.pause();
+        this.pauseVideos();
+    }
+
+    resolve();
+
+})
+    .catch((e) => {
+        console.error(e);
+        if (this.audioDeferredPromise) {
+            this.audioDeferredPromise = null;
+        }
+
+        if (this.videoDeferredPromises) {
+            this.videoDeferredPromises.length = 0;
+        }
+    });
+```
+
+3.	How would you track down a performance issue in production? Have you ever had to do this?
+
+  For css related performance, I'd use the performance tab and inspect the the most excessively painting elements. From there,  I'd try to adjust styling attributes and see if composite rendering can done instead (ie. use transform3ds for positioning) so that the graphics card can be leveraged for acceleration. With JavaScript, I would also utilize the developer tools and investigate bottlenecks and errors using the debugger. I would try to adjust the logic to improve time complexity where applicable.
+
+4.	How would you improve the API that you just used?
+
+  Allow disjointed queries (name OR address OR city ... ect), get cities by name (instead of all of them at once)
+
+5.	Please describe yourself using JSON.
+
+```json
+{
+	"name": "Eric",
+	"birthdate": "1993-11-02T00:00:00Z",
+	"university": "McMaster",
+	"degree": "Business Informatics, B.ASc",
+	"web_technologies": ["React", "ES6", "JavaScript", "php", "symfony", "doctrine", "python", "AWS", "ElasticSearch"],
+	"last3Jobs": [{
+		"UILab Inc.": "Full-stack Developer"
+	}, {
+		"Travel Nation.": "Operations Coordinator/Web Developer"
+	}, {
+		"CIBC": "Application Consultant"
+	}],
+	"yearsOfGuitarPlaying": 12,
+	"guitars": ["Ibanez S7320", "La Patrie", "Cruzer"],
+	"ampCount": 1,
+	"isLookingForNewChallengingWork": true
+}
+```
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
